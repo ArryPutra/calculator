@@ -1,0 +1,122 @@
+<!-- npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/dist/output.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="">
+    <main class="w-full h-screen bg-gray-50 flex items-center justify-center">
+        
+        <article class="bg-slate-950 p-5 rounded-xl shadow-2xl w-[17rem]">
+            <header id="displayNumber" class="bg-white break-all text-end px-3 py-2 text-2xl font-semibold">0</header>
+            <main class="mt-6 font-semibold grid grid-cols-4 gap-3 select-none">
+                <button onclick="clearNumber()" class="hover:bg-slate-900 duration-75 bg-slate-800 px-3 py-3 rounded-lg text-red-500">
+                    C
+                </button>
+                <button onclick="deletePrevious()" class="hover:bg-slate-900 duration-75 bg-slate-800 px-3 py-3 rounded-lg text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 scale-90">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75L14.25 12m0 0l2.25 2.25M14.25 12l2.25-2.25M14.25 12L12 14.25m-2.58 4.92l-6.375-6.375a1.125 1.125 0 010-1.59L9.42 4.83c.211-.211.498-.33.796-.33H19.5a2.25 2.25 0 012.25 2.25v10.5a2.25 2.25 0 01-2.25 2.25h-9.284c-.298 0-.585-.119-.796-.33z" />
+                    </svg>                      
+                </button>
+                <button onclick="addOperation('%')" class="hover:bg-slate-900 duration-75 bg-slate-800 px-3 py-3 rounded-lg text-sky-400">
+                    %
+                </button>
+                <button onclick="addOperation('/')" class="hover:bg-slate-900 duration-75 bg-slate-800 px-3 py-3 rounded-lg text-sky-400">
+                    /
+                </button>
+                <button onclick="addNumber(7)" class="hover:bg-slate-900 duration-75 bg-slate-800 px-3 py-3 rounded-lg text-gray-200">
+                    7
+                </button>
+                <button onclick="addNumber(8)" class="hover:bg-slate-900 duration-75 bg-slate-800 px-3 py-3 rounded-lg text-gray-200">
+                    8
+                </button>
+                <button onclick="addNumber(9)" class="hover:bg-slate-900 duration-75 bg-slate-800 px-3 py-3 rounded-lg text-gray-200">
+                    9
+                </button>
+                <button onclick="addOperation('*')" class="hover:bg-slate-900 duration-75 bg-slate-800 px-3 py-3 rounded-lg text-sky-400">
+                    *
+                </button>
+                <button onclick="addNumber(4)" class="hover:bg-slate-900 duration-75 bg-slate-800 px-3 py-3 rounded-lg text-gray-200">
+                    4
+                </button>
+                <button onclick="addNumber(5)" class="hover:bg-slate-900 duration-75 bg-slate-800 px-3 py-3 rounded-lg text-gray-200">
+                    5
+                </button>
+                <button onclick="addNumber(6)" class="hover:bg-slate-900 duration-75 bg-slate-800 px-3 py-3 rounded-lg text-gray-200">
+                    6
+                </button>
+                <button onclick="addOperation('-')" class="hover:bg-slate-900 duration-75 bg-slate-800 px-3 py-3 rounded-lg text-sky-400">
+                    -
+                </button>
+                <button onclick="addNumber(1)" class="hover:bg-slate-900 duration-75 bg-slate-800 px-3 py-3 rounded-lg text-gray-200">
+                    1
+                </button>
+                <button onclick="addNumber(2)" class="hover:bg-slate-900 duration-75 bg-slate-800 px-3 py-3 rounded-lg text-gray-200">
+                    2
+                </button>
+                <button onclick="addNumber(3)" class="hover:bg-slate-900 duration-75 bg-slate-800 px-3 py-3 rounded-lg text-gray-200">
+                    3
+                </button>
+                <button onclick="addOperation('+')" class="hover:bg-slate-900 duration-75 bg-slate-800 px-3 py-3 rounded-lg text-sky-400">
+                    +
+                </button>
+                
+                <button onclick="addNumber(0)" class="hover:bg-slate-900 duration-75 bg-slate-800 px-3 py-3 rounded-lg text-gray-200">
+                    0
+                </button>
+                <button onclick="addComa()" class="hover:bg-slate-900 duration-75 bg-slate-800 px-3 py-3 rounded-lg text-gray-200">
+                    .
+                </button>
+                <button onclick="showResult()" class="hover:bg-sky-400 col-span-2 duration-75 bg-sky-500 px-3 py-3 rounded-full text-gray-200">
+                    =
+                </button>
+            </main>
+        </article>
+
+    </main>
+
+    <script type="text/javascript">
+        let displayNumber = document.getElementById('displayNumber')
+
+        function addNumber(num) {
+            if(displayNumber.textContent.charAt(0) == '0') {
+                displayNumber.textContent = ''
+            }
+            displayNumber.textContent += num
+        }
+        function addOperation(op) {
+            if(displayNumber.textContent.charAt(0) !== '0' &&
+            !['+', '-', '*', '/', '%'].includes(displayNumber.textContent.charAt(displayNumber.textContent.length - 1))) {
+                displayNumber.textContent += op
+            }
+        }
+        function addComa() {
+            if(displayNumber.textContent.charAt(displayNumber.textContent.length - 1) !== '.') {
+                displayNumber.textContent += '.'
+            }
+        }
+        function clearNumber() {
+            displayNumber.textContent = '0'
+        }
+        function deletePrevious() {
+            displayNumber.textContent = displayNumber.textContent.slice(0, displayNumber.textContent.length - 1)
+            if(displayNumber.textContent == '') {
+                displayNumber.textContent = '0'
+            }
+        }
+        function showResult() {
+            try {
+                displayNumber.textContent = eval(displayNumber.textContent)
+            } catch {
+                displayNumber.textContent = displayNumber.textContent.substring(0, displayNumber.textContent.length - 1)
+                displayNumber.textContent = eval(displayNumber.textContent)
+            }
+        }
+    </script>
+
+</body>
+</html>
